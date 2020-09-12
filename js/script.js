@@ -6,19 +6,20 @@ let categories;
 let url = BASE_URL +"api_category.php";
 console.log("\n hi\n");
 let categoriesContainer = document.getElementById("categories-id");
-
-
+let gameSettings = document.getElementById("game-settings-id");
 updateToken();
-
+displayLoading();
 getAllCategories()
     .then((data)=>createCategoryBtns(data))
     .then(hideLoading);
 //click
-//loading
-//getQuestions
-//hide loading
-//update used questions (maybe update token)
-//start game
+
+gameSettings.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    if(validateGameSettings) startGame();
+});
+
+
 
 //Function to get the id and name of the categories in an array
 function getAllCategories(){
@@ -31,22 +32,60 @@ function getAllCategories(){
 }
 
 function createCategoryBtns(data){
+    let any = {id:"any",name:"All categories"};
+    data.unshift(any);
     data.forEach((category)=>{
         let btn = document.createElement("button");
         btn.id = "category-"+category.id;
-        btn.textContent = category.name;
+        let title = document.createElement("span");
+        title.textContent = category.name;
+        btn.appendChild(title);
         btn.classList.add("category-btn");
+        btn.addEventListener("click",()=>{
+            categoriesContainer.querySelector(".selected").classList.remove("selected");
+            btn.classList.add("selected");
+        });
         categoriesContainer.appendChild(btn);
     });
-    data.forEach(e=>console.log(e));
+    categoriesContainer.children[0].classList.add("selected");
 }
-function hideLoading(){}
+
+
+function startGame(id){
+    gameSettings.classList.add("hide");
+    categoriesContainer.classList.add("hide");
+    displayLoading();
+    let number = gameSettings.querySelector("input[type='number'").value;
+    let categoryId = categoriesContainer.querySelector(".selected").id.slice(9);//slice to remove "category-" from the id
+    let difficulty = gameSettings.querySelector("#difficulty-id > [selected]").textContent.toLowerCase();
+    getQuestions(number,categoryId,difficulty,"multiple")
+        .then((data)=>{
+            hideLoading();
+            displayQuestions(data);
+        });
+    //displayQuestions board
+    //update used questions check token
+}
+
+function questionsDisplay(data){
+    document.getElementById("answers-id");
+
+    console.log("diplay");
+}
+
+function hideLoading(){
+    document.getElementById("loading-animation").classList.add("hide");
+
+}
+function displayLoading(){
+    document.getElementById("loading-animation").classList.remove("hide");
+}
 function updateToken(){
     let requestTokenUrl=BASE_URL+"api_token.php?command=request";
     fetch(requestTokenUrl)
         .then((response)=>response.json())
         .then((data)=>{
-            token = data.token;
+            token = "token="+data.token;
         });
 }
 
@@ -59,10 +98,11 @@ function updateToken(){
  * @retuns {array}
  */
 function getQuestions(number=DEF_NUM_QUE,categoryId="any",difficulty="any",type="any"){
-    let selectedCategory = (categoryId==="any")? "":`category=${category}`;
+    let selectedCategory = (categoryId==="any")? "":`category=${categoryId}`;
     let selectedDifficulty = (difficulty==="any")?"": `difficulty=${difficulty}`;
     let selectedType = (type==="any")?"":`type=${type}`;
     let requestURL = BASE_URL + `api.php?amount=${number}&${selectedCategory}&${selectedDifficulty}&${selectedType}&${token}`;
+    console.log(requestURL);
     return fetch(requestURL)
     .then(response=>response.json())
     .then((data)=>{
@@ -70,9 +110,15 @@ function getQuestions(number=DEF_NUM_QUE,categoryId="any",difficulty="any",type=
         return data.results;
     });
 }
-function getNumQuestions(){
 
-}
-function printQuestion(){
-
+function validateGameSettings(){
+    let erroMessage = docuemnt.getElementById("error-message-id");
+    let numQuestions = gameSettings.elements[0].value;
+    if(numQuestions < 10 || numQuestions > 30){
+        //print invalid number
+        errorMessage.classList.remove("hide");
+        return false;
+    }
+    errorMessage.classList.add("hide");
+    return true;
 }

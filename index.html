@@ -12,9 +12,33 @@
             <header>
 
             </header>
-            <main>
+            <main class="game-wrapper">
+                <form id="game-settings-id" class="game-options">
+                    <input  value="10" type="number" placeholder="Numer of questions" min=10 max=30>
+                    <select id="difficulty-id">
+                        <option selected>Easy</option>
+                        <option >Medium</option>
+                        <option >Hard</option>
+                    </select>
+                    <button type="submit" class="btn-start">Start</button>
+                </form>
+                <div id="error-message-id" class="error-message hide">
+                    Please enter a number between <span>10</span> and <span>30</span>.
+                </div>
                 <div id="categories-id" class="categories" >
 
+                </div>
+                <div id="loading-animation" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                <div class="game-board">
+                    <div class="question">
+                        What is the first book of the Old Testament?
+                    </div>
+                    <ul id="answers-id" class="answers">
+                        <li>Exodus</li>
+                        <li>Leviticusadfa asdf asdf asdf asdasdf adfas ddfas asdfasfasf asdfasfd asdfasfs</li>
+                        <li>Numbers</li>
+                        <li>Apolo</li>
+                    </ul>
                 </div>
             </main>
             <footer>

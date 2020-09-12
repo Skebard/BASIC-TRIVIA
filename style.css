@@ -1,44 +1,213 @@
-*{
-    box-sizing:border-box;
-    padding:0;
-    margin:0;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
-html,body{
-    height:100%;
+
+html,
+body {
+    height: 100%;
 }
-header{
-    width:100%;
-    height:100px;
+ul{
+    list-style-type:none;
 }
-.page-wrapper{
-    position:relative;
-    min-height:100%;
+.hide, html .hide{
+    display:none;
+}
+header {
+    width: 100%;
+    height: 100px;
+}
+
+.page-wrapper {
+    position: relative;
+    min-height: 100%;
     padding-bottom: 2rem;
-    background-color:blue;
+    background-color: blue;
 }
-main{
-    background-color:purple;
-    width:100%;
+
+.game-wrapper {
+    background-color: purple;
+    width: 100%;
 }
-.categories{
+.game-options{
     display:flex;
+    flex-direction:row;
+    justify-content:center;
+    padding-left:2rem;
+    padding-top:1rem;
+}
+.game-options > *{
+    display:block;
+    outline:none;
+    border:none;
+    font-size:1.4rem;
+    font-weight:700;
+    padding:1rem;
+    margin-right:1rem;
+    border-radius:0.5rem;
+}
+.btn-start{
+}
+
+
+.error-message{
+    position:relative;
+    font-size:1.4rem;
+    font-weight:bold;
+    color:red;
+    width:450px;
+    text-align:center;
+    left:50%;
+    transform:translate(-50%,0);
+    background-color:white;
+    padding:1rem;
+    margin-top:1rem;
+    border-radius:1rem;
+}
+.error-message >span{
+    font-size:1.6rem;
+}
+
+.categories {
+    display: flex;
     justify-content: center;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 
 }
-.category-btn{
-    flex-shrink:0;
-    height:200px;
-    width:200px;
-    padding:1rem;
-    font-size:1.3rem;
-    font-weight:700;
-    margin:1rem;
+
+.category-btn {
+    flex-shrink: 0;
+    height: 200px;
+    width: 200px;
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 1rem;
+    border: none;
+    border-radius: 2rem;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
-footer{
-    width:100%;
-    position:absolute;
-    height:2rem;
-    bottom:0;
-    background-color:red;
+
+.category-btn span {
+    position: relative;
+    z-index: 10;
+}
+
+.category-btn:before {
+    z-index: 5;
+    position: absolute;
+    height: 200%;
+    width: 200%;
+    background-color: green;
+    display: block;
+    content: "";
+    border-radius: 50%;
+    bottom: -190%;
+    right: -190%;
+    transition: all 0.4s;
+}
+
+.category-btn:hover:before {
+    bottom: -50%;
+    right: -50%;
+}
+.category-btn.selected{
+    background-color:orange;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    height: 2rem;
+    bottom: 0;
+    background-color: red;
+}
+/*** Game board***/
+.question{
+    padding-top:1rem;
+    font-size:1.4rem;
+    font-weight:700;
+    text-align:center;
+    margin-bottom:2rem;
+}
+.answers{
+    font-size:1.6rem;
+    font-weight:700;
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:wrap;
+}
+.answers > li{
+    flex-shrink:0;
+    width:calc(100% - 100px);
+    padding:2rem;
+    background-color:orange;
+    border-radius:1rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:1rem;
+    cursor:pointer;
+}
+.answers > li:hover{
+    box-shadow: 0 0 1rem white;
+}
+
+/* loading animation*/
+.lds-ring.hide{
+    display:none;
+}
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    left:50%;
+    transform:translate(-50%,0);
+    margin-top:2rem;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 475px){
+    .error-message{
+        width:180px;
+    }
 }
