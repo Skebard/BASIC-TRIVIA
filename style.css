@@ -1,0 +1,44 @@
+*{
+    box-sizing:border-box;
+    padding:0;
+    margin:0;
+}
+html,body{
+    height:100%;
+}
+header{
+    width:100%;
+    height:100px;
+}
+.page-wrapper{
+    position:relative;
+    min-height:100%;
+    padding-bottom: 2rem;
+    background-color:blue;
+}
+main{
+    background-color:purple;
+    width:100%;
+}
+.categories{
+    display:flex;
+    justify-content: center;
+    flex-wrap:wrap;
+
+}
+.category-btn{
+    flex-shrink:0;
+    height:200px;
+    width:200px;
+    padding:1rem;
+    font-size:1.3rem;
+    font-weight:700;
+    margin:1rem;
+}
+footer{
+    width:100%;
+    position:absolute;
+    height:2rem;
+    bottom:0;
+    background-color:red;
+}
