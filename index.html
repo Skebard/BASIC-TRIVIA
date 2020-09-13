@@ -1,50 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>TRIVIA</title>
-        <meta name="description" content="TRIVIA quiz for different topics and difficulties">
-        <link rel="stylesheet" href="style.css">
-        <script defer src="js/script.js"></script>
-    </head>
-    <body>
-        <div class="page-wrapper">
-            <header>
 
-            </header>
-            <main class="game-wrapper">
+<head>
+    <meta charset="UTF-8">
+    <title>TRIVIA</title>
+    <meta name="description" content="TRIVIA quiz for different topics and difficulties">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header>
+            <h1>
+                TRIVIA QUIZ
+            </h1>
+        </header>
+        <main class="game-wrapper">
+            <div id="game-menu-id">
                 <form id="game-settings-id" class="game-options">
-                    <input  value="10" type="number" placeholder="Numer of questions" min=10 max=30>
-                    <select id="difficulty-id">
+                    <input name="number" value="10" type="number" placeholder="Numer of questions" min=10 max=30>
+                    <select name="difficulty" id="difficulty-id">
                         <option selected>Easy</option>
-                        <option >Medium</option>
-                        <option >Hard</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
                     </select>
                     <button type="submit" class="btn-start">Start</button>
                 </form>
                 <div id="error-message-id" class="error-message hide">
                     Please enter a number between <span>10</span> and <span>30</span>.
                 </div>
-                <div id="categories-id" class="categories" >
-
+                <div id="categories-id" class="categories">
                 </div>
-                <div id="loading-animation" class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                <div class="game-board">
-                    <div class="question">
-                        What is the first book of the Old Testament?
-                    </div>
-                    <ul id="answers-id" class="answers">
-                        <li>Exodus</li>
-                        <li>Leviticusadfa asdf asdf asdf asdasdf adfas ddfas asdfasfasf asdfasfd asdfasfs</li>
-                        <li>Numbers</li>
-                        <li>Apolo</li>
-                    </ul>
+            </div>
+            <div id="loading-animation" class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="game-board hide">
+                <div id="question-id" class="question">
                 </div>
-            </main>
-            <footer>
+                <ul id="answers-id" class="answers">
+                    <li data-pos="0"></li>
+                    <li data-pos="1"></li>
+                    <li data-pos="2"></li>
+                    <li data-pos="3"></li>
+                </ul>
+            </div>
+            <div id="end-game-screen-id" class="end-game-screen hide">
+                <h1>Points: <span id="points-id"></span></h1>
+                <button id="main-menu-btn-id" class="main-menu-btn">Main menu</button>
+            </div>
+        </main>
+        <div class="transparent-screen"></div>
+        <footer>
+            <small>
+                Data from <a href="https://opentdb.com">OPEN TRIVIA DATABASE</a>
+            </small>
+        </footer>
+    </div>
 
-            </footer>
-        </div>
+</body>
 
-    </body>
 </html>

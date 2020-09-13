@@ -17,17 +17,26 @@ ul{
 header {
     width: 100%;
     height: 100px;
+    padding: 1rem 0 0 1rem;
+    font-family: Helvetica,sans-serif;
+    letter-spacing:0.2rem;
+}
+header > h1{
+    font-size:2.8rem;
+    text-shadow: 2px 2px 1rem  white,
+    10px 2px 1rem  black,
+    1px 1px white
+    ;
 }
 
 .page-wrapper {
     position: relative;
     min-height: 100%;
-    padding-bottom: 2rem;
-    background-color: blue;
+    padding-bottom: 4rem;
+    background-color: #00c9db;
 }
 
 .game-wrapper {
-    background-color: purple;
     width: 100%;
 }
 .game-options{
@@ -48,6 +57,11 @@ header {
     border-radius:0.5rem;
 }
 .btn-start{
+    cursor:pointer;
+}
+.btn-start:hover{
+    background-color:black;
+    color: #00c9db;
 }
 
 
@@ -102,7 +116,7 @@ header {
     position: absolute;
     height: 200%;
     width: 200%;
-    background-color: green;
+    background-color: black;
     display: block;
     content: "";
     border-radius: 50%;
@@ -115,6 +129,10 @@ header {
     bottom: -50%;
     right: -50%;
 }
+.category-btn:hover{
+    color:#00c9db;
+    box-shadow: 0 0 1rem white;
+}
 .category-btn.selected{
     background-color:orange;
 }
@@ -122,9 +140,20 @@ header {
 footer {
     width: 100%;
     position: absolute;
-    height: 2rem;
+    height: 4rem;
     bottom: 0;
-    background-color: red;
+    background-color: black;
+    color: white;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    padding-right:2rem;
+}
+footer a{
+    color: #00c9db;
+    text-decoration:none;
+    font-family: Helvetica,sans-serif;
+
 }
 /*** Game board***/
 .question{
@@ -132,7 +161,16 @@ footer {
     font-size:1.4rem;
     font-weight:700;
     text-align:center;
+    margin:auto;
     margin-bottom:2rem;
+    padding: 1rem;
+    border-radius:1rem;
+    background-color:black;
+    width:fit-content;
+    color: #00c9db;
+    position:relative;
+    right:0;
+    left:0;
 }
 .answers{
     font-size:1.6rem;
@@ -145,17 +183,40 @@ footer {
     flex-shrink:0;
     width:calc(100% - 100px);
     padding:2rem;
-    background-color:orange;
+    background-color:white;
     border-radius:1rem;
     display:flex;
     justify-content:center;
     align-items:center;
     margin-bottom:1rem;
     cursor:pointer;
+    transition: all 0.4s;
 }
 .answers > li:hover{
     box-shadow: 0 0 1rem white;
+    background-color:orange;
 }
+.answers > li.correct{
+    background-color:rgb(111, 207, 111);
+}
+.answers > li.incorrect{
+    background-color:rgb(236, 120, 120);
+}
+
+/** End screen**/
+.hide.end-game-screen{
+    display:none;
+}
+.end-game-screen{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+.main-menu-btn{
+    padding:1rem;
+    font-size:1.6rem;
+}
+
 
 /* loading animation*/
 .lds-ring.hide{
