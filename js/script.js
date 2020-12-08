@@ -5,7 +5,6 @@ const SHOW_ANSWER_TIME = 1000; //milliseconds after choosing an answer
 let token; // the token is used to avoid getting repeated questions
 let categories;
 let url = BASE_URL + "api_category.php";
-console.log("\n hi\n");
 let categoriesContainer = document.getElementById("categories-id");
 let gameSettings = document.getElementById("game-settings-id");
 let gameBoard = document.querySelector(".game-board");
@@ -26,9 +25,6 @@ getAllCategories()
                 let number = parseInt(gameSettings.elements.number.value);
                 let category = categoriesContainer.querySelector(".selected").id.slice(9);
                 let difficulty = gameSettings.elements.difficulty.value.toLowerCase();
-                console.log(number);
-                console.log(category);
-                console.log(difficulty);
                 let newGame = new Game(number,category,difficulty);
                 newGame.startGame();
             }
@@ -39,7 +35,6 @@ getAllCategories()
         gameMenu.classList.remove("hide");
     });
 //click
-console.log("run")
 
 
 
@@ -89,7 +84,6 @@ function randomInt(min, max) {
 
 function hideLoading() {
     document.getElementById("loading-animation").classList.add("hide");
-    console.log("byebye");
 }
 
 function displayLoading() {
@@ -133,11 +127,9 @@ function Game(quantity, category, difficulty, user = false) {
         let selectedDifficulty = (difficulty === "any") ? "" : `difficulty=${difficulty}`;
         let selectedType = `type=${type}`;
         let requestURL = BASE_URL + `api.php?amount=${number}&${selectedCategory}&${selectedDifficulty}&${selectedType}&${token}`;
-        console.log(requestURL);
         return fetch(requestURL)
             .then(response => response.json())
             .then((data) => {
-                console.log(data.results);
                 return data.results;
             });
     }
@@ -160,8 +152,6 @@ function Game(quantity, category, difficulty, user = false) {
     function printAnswers(position) {
         rightAnsPosition = randomInt(0, 4);
         let incorrectAns = 0;
-        console.log(questions);
-        console.log(position);
         answersHTML.forEach((ans, index) => {
             if (index === rightAnsPosition) {
                 ans.textContent = questions[position].correct_answer;
@@ -170,7 +160,6 @@ function Game(quantity, category, difficulty, user = false) {
                 incorrectAns++;
             }
             ans.classList = "";
-            console.log(ans);
         });
     }
 
@@ -184,7 +173,6 @@ function Game(quantity, category, difficulty, user = false) {
         showAnswers(e.currentTarget);
         currentQuestion++;
         if (currentQuestion === quantity) { //-1 cause the array index starts by 0
-            console.log("End game");
             setTimeout(endGame,SHOW_ANSWER_TIME);
             return true;
         }
@@ -193,7 +181,6 @@ function Game(quantity, category, difficulty, user = false) {
     }
 
     function showAnswers(clickedAnswer) {
-        console.log(clickedAnswer);
         if (parseInt(clickedAnswer.dataset.pos) === rightAnsPosition) {
             clickedAnswer.classList.add("correct");
             correctAnswers++;
@@ -234,11 +221,8 @@ function Game(quantity, category, difficulty, user = false) {
         updateToken();
     }
     this.showValues = function(){
-        console.log(correctAnswers);
-        console.log(currentQuestion);
     }
     this.disQuestions = function () {
-        console.log(questions);
     }
     this.quest = displayQuestions;
     this.remov = removeEvents;
